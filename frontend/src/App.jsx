@@ -1,7 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { supabase } from './supabaseClient'; // THE NEW VAULT KEY
+import { supabase } from './supabaseClient';
 import './App.css';
+
+// =====================================================================
+// 🛑 CONFIGURATION: PASTE YOUR LIVE LINKS HERE
+// =====================================================================
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/4gM4gAgBvgziekN6Dm7IY00"; 
+const BACKEND_API_URL = "https://quant-backend-7uo3.onrender.com"; // <-- Replace with your Render URL
+const WEBSOCKET_URL = "wss://https://quant-backend-7uo3.onrender.com/ws/market"; // <-- Replace with your Render URL (Keep the wss://)
+// =====================================================================
 
 // --- 1. THE AUTHENTICATION LANDING PAGE ---
 const AuthPage = () => {
@@ -15,7 +23,6 @@ const AuthPage = () => {
     e.preventDefault();
     setLoading(true);
     setErrorMsg('');
-
     try {
       if (isLogin) {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -37,28 +44,14 @@ const AuthPage = () => {
       <div className="auth-box">
         <h1>QUANT<span>TERMINAL</span></h1>
         <p className="subtitle">Institutional-Grade Market Intelligence</p>
-        
         <form onSubmit={handleAuth} className="auth-form">
           {errorMsg && <div className="error-banner">{errorMsg}</div>}
-          <input 
-            type="email" 
-            placeholder="Email Address" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
-          />
-          <input 
-            type="password" 
-            placeholder="Password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
-          />
+          <input type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           <button type="submit" disabled={loading} className="auth-submit-btn">
             {loading ? 'Authenticating...' : isLogin ? 'Access Terminal' : 'Create Account'}
           </button>
         </form>
-
         <p className="auth-switch" onClick={() => setIsLogin(!isLogin)}>
           {isLogin ? "Need an account? Sign up here." : "Already a member? Log in."}
         </p>
@@ -66,36 +59,27 @@ const AuthPage = () => {
     </div>
   );
 };
-// --- 1.5 THE PAYWALL (The Bouncer) ---
-const PaywallPage = ({ session, onBypass }) => {
-  // https://buy.stripe.com/4gM4gAgBvgziekN6Dm7IY00
-  const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/4gM4gAgBvgziekN6Dm7IY00";
 
+// --- 2. THE PAYWALL ---
+const PaywallPage = ({ session, onBypass }) => {
   return (
     <div className="auth-container">
       <div className="auth-box paywall-box">
         <h1>UNLOCK <span>PRO</span></h1>
         <p className="subtitle">You need an active subscription to access the live terminal.</p>
-        
         <div className="pricing-card">
           <h2>$29<span>/month</span></h2>
           <ul className="features-list">
             <li>✅ Live Institutional Polygon Data</li>
-            <li>✅ AI Sentiment Analysis (FinBERT)</li>
+            <li>✅ AI Sentiment Analysis (VADER)</li>
             <li>✅ V2 Quantitative Trend Filters</li>
             <li>✅ Dynamic Volatility Targets (ATR)</li>
           </ul>
-          
-          <a href="https://buy.stripe.com/4gM4gAgBvgziekN6Dm7IY00" className="auth-submit-btn pay-btn">
+          <a href={STRIPE_PAYMENT_LINK} target="_blank" rel="noreferrer" className="auth-submit-btn pay-btn">
             Subscribe Securely via Stripe
           </a>
-          
-          {/* Temporary button for you as the developer to test the terminal without paying */}
-          <button onClick={onBypass} className="bypass-btn">
-            [Developer: Bypass Paywall]
-          </button>
+          <button onClick={onBypass} className="bypass-btn">[Developer: Bypass Paywall]</button>
         </div>
-        
         <div className="user-profile paywall-profile">
            <p className="user-email">Logged in as: {session.user.email}</p>
            <button className="logout-btn" onClick={() => supabase.auth.signOut()}>Sign Out</button>
@@ -105,7 +89,7 @@ const PaywallPage = ({ session, onBypass }) => {
   );
 };
 
-// --- 2. THE PRO TRADINGVIEW COMPONENT (Unchanged) ---
+// --- 3. THE PRO TRADINGVIEW COMPONENT ---
 const TradingViewWidget = ({ symbol }) => {
   const container = useRef();
   useEffect(() => {
@@ -122,7 +106,7 @@ const TradingViewWidget = ({ symbol }) => {
   return <div className="tradingview-widget-container" ref={container} style={{ height: "100%", width: "100%" }} />;
 }
 
-// --- 3. THE MAIN SAAS TERMINAL (Your Engine) ---
+// --- 4. THE MAIN SAAS TERMINAL ---
 const TerminalSaaS = ({ session }) => {
   const [data, setData] = useState([]);
   const [history, setHistory] = useState([]);
@@ -137,18 +121,20 @@ const TerminalSaaS = ({ session }) => {
   const activeAsset = data.find(a => a.Raw_Ticker === selectedAssetTicker);
 
   useEffect(() => {
+    // 1. Fetch Initial Data via REST API
     if (category === 'history') {
       setLoading(true);
-      axios.get('http://localhost:8000/api/history').then(res => { setHistory(res.data); setLoading(false); });
+      axios.get(`${BACKEND_API_URL}/api/history`).then(res => { setHistory(res.data); setLoading(false); });
       return; 
     } else {
       setLoading(true);
-      axios.get(`http://localhost:8000/api/screener?category=${category}`)
+      axios.get(`${BACKEND_API_URL}/api/screener?category=${category}`)
         .then(res => { if (Array.isArray(res.data)) { setData(res.data); } setLoading(false); })
         .catch(() => setLoading(false));
     }
 
-    const ws = new WebSocket("ws://localhost:8000/ws/market");
+    // 2. Connect to Live WebSocket for Flashing Prices
+    const ws = new WebSocket(WEBSOCKET_URL);
     ws.onopen = () => setServerStatus("LIVE");
     ws.onmessage = (event) => {
       const liveData = JSON.parse(event.data);
@@ -213,7 +199,6 @@ const TerminalSaaS = ({ session }) => {
           <button className={category === 'crypto' ? 'active' : ''} onClick={() => setCategory('crypto')}>🪙 24/7 Crypto</button>
           <button className={category === 'history' ? 'active' : ''} onClick={() => setCategory('history')}>📜 History</button>
         </nav>
-        {/* NEW: LOGOUT BUTTON */}
         <div className="user-profile">
           <p className="user-email">{session.user.email}</p>
           <button className="logout-btn" onClick={() => supabase.auth.signOut()}>Sign Out</button>
@@ -260,12 +245,10 @@ const TerminalSaaS = ({ session }) => {
   );
 }
 
-// --- 4. THE GATEKEEPER (Main App Router) ---
+// --- 5. THE GATEKEEPER (Main App Router) ---
 export default function App() {
   const [session, setSession] = useState(null);
   const [loadingInit, setLoadingInit] = useState(true);
-  
-  // This state pretends we checked a database to see if they paid
   const [isProUser, setIsProUser] = useState(false); 
 
   useEffect(() => {
@@ -276,7 +259,6 @@ export default function App() {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
-      // Reset pro status on logout
       if (!session) setIsProUser(false); 
     });
 
@@ -285,13 +267,8 @@ export default function App() {
 
   if (loadingInit) return <div className="loading">Loading Secure Vault...</div>;
 
-  // ROUTING LOGIC:
-  // 1. Not logged in? Show Login Screen.
   if (!session) return <AuthPage />;
-  
-  // 2. Logged in, but hasn't paid? Show Paywall.
   if (!isProUser) return <PaywallPage session={session} onBypass={() => setIsProUser(true)} />;
   
-  // 3. Logged in AND Paid? Show the actual product.
   return <TerminalSaaS session={session} />;
 }
