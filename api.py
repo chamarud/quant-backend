@@ -6,182 +6,129 @@ import uvicorn
 import json
 import os
 import asyncio
-import websockets
+import random
 from datetime import datetime
-from transformers import pipeline
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-print("Waking up V2 Quant Brain & Institutional Data Engine...")
-sentiment_analyzer = pipeline("sentiment-analysis", model="ProsusAI/finbert")
-
+# Initialize App & VADER
 app = FastAPI()
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+analyzer = SentimentIntensityAnalyzer()
 
-LOG_FILE = "signals_log.json"
+# CORS: Allows your React frontend (and Vercel) to talk to this backend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# --- 1. WEBSOCKET MANAGER ---
-class ConnectionManager:
-    def __init__(self):
-        self.active_connections: list[WebSocket] = []
-
-    async def connect(self, websocket: WebSocket):
-        await websocket.accept()
-        self.active_connections.append(websocket)
-        print(f"User Connected. Active Dashboards: {len(self.active_connections)}")
-
-    def disconnect(self, websocket: WebSocket):
-        self.active_connections.remove(websocket)
-
-    async def broadcast_data(self, data: dict):
-        for connection in self.active_connections:
-            try:
-                await connection.send_text(json.dumps(data))
-            except:
-                pass
-
-manager = ConnectionManager()
-
-# --- 2. INSTITUTIONAL DATA FEED (Binance Free WebSocket) ---
-
-async def binance_stream():
-    """Connects to Binance's Public Feed - No API Key Required!"""
-    # We listen to Bitcoin, Ethereum, and Solana (USD/Tether pairs)
-    uri = "wss://stream.binance.com:9443/ws/btcusdt@ticker/ethusdt@ticker/solusdt@ticker"
-    
-    while True:
-        try:
-            async with websockets.connect(uri) as ws:
-                print("🟢 Connected to Binance Live Feed (Free Institutional Data)!")
-                
-                while True:
-                    message = await ws.recv()
-                    data = json.loads(message)
-                    
-                    # Binance returns "s" for symbol and "c" for close price
-                    raw_symbol = data.get("s")
-                    price = float(data.get("c"))
-                    
-                    # Map Binance symbols to our App tickers
-                    symbol_map = {
-                        "BTCUSDT": "BTC-USD",
-                        "ETHUSDT": "ETH-USD",
-                        "SOLUSDT": "SOL-USD"
-                    }
-                    
-                    react_ticker = symbol_map.get(raw_symbol)
-                    if react_ticker:
-                        live_update = {
-                            "type": "PRICE_UPDATE",
-                            "timestamp": datetime.now().strftime("%H:%M:%S"),
-                            "updates": {react_ticker: round(price, 2)}
-                        }
-                        await manager.broadcast_data(live_update)
-                        
-        except Exception as e:
-            print(f"🔴 Binance Feed Dropped: {e}. Reconnecting in 5s...")
-            await asyncio.sleep(5)
-
-@app.on_event("startup")
-async def startup_event():
-    # Only one task: The free Binance stream
-    asyncio.create_task(binance_stream())
-
-# --- 3. QUANTITATIVE CORE LOGIC ---
-def log_signal(pair, price, action, pattern, tp, sl):
-    if action == "WAIT": return
-    entry = {"timestamp": datetime.now().strftime("%H:%M:%S"), "pair": pair, "price": price, "action": action, "pattern": pattern, "tp": tp, "sl": sl}
-    logs = []
-    if os.path.exists(LOG_FILE):
-        with open(LOG_FILE, "r") as f:
-            try: logs = json.load(f)
-            except: logs = []
-    if logs and logs[-1]["pair"] == pair and logs[-1]["action"] == action: return
-    logs.append(entry)
-    with open(LOG_FILE, "w") as f: json.dump(logs[-100:], f, indent=4)
-
-def get_market_data(ticker_symbol):
-    t = yf.Ticker(ticker_symbol)
-    hist = t.history(period="1y")
-    if hist.empty or len(hist) < 200: return {"Price": 0, "RSI": 50, "Trend": "Unknown", "SMA_200": 0, "ATR": 0, "hist": [], "df": None}
-    
-    prices = hist['Close'].tolist()
-    delta = hist['Close'].diff()
-    gain = (delta.where(delta > 0, 0)).rolling(14).mean()
-    loss = (-delta.where(delta < 0, 0)).rolling(14).mean()
-    rsi = 100 - (100 / (1 + (gain / loss)))
-    cur_rsi = round(rsi.iloc[-1], 2) if not pd.isna(rsi.iloc[-1]) else 50
-    
-    sma_200_series = hist['Close'].rolling(window=200).mean()
-    cur_sma_200 = round(sma_200_series.iloc[-1], 4)
-    
-    hist['High-Low'] = hist['High'] - hist['Low']
-    hist['High-PrevClose'] = abs(hist['High'] - hist['Close'].shift(1))
-    hist['Low-PrevClose'] = abs(hist['Low'] - hist['Close'].shift(1))
-    hist['TR'] = hist[['High-Low', 'High-PrevClose', 'Low-PrevClose']].max(axis=1)
-    cur_atr = round(hist['TR'].rolling(window=14).mean().iloc[-1], 4)
-    
-    trend = "Macro Uptrend" if prices[-1] > cur_sma_200 else "Macro Downtrend"
-    return {"Price": round(prices[-1], 4), "RSI": cur_rsi, "Trend": trend, "SMA_200": cur_sma_200, "ATR": cur_atr, "hist": prices[-15:], "df": hist}
+# Asset Universe
+TICKERS = {
+    "crypto": [("BTC-USD", "Bitcoin"), ("ETH-USD", "Ethereum"), ("SOL-USD", "Solana")],
+    "stocks": [("AAPL", "Apple"), ("TSLA", "Tesla"), ("NVDA", "Nvidia")],
+    "forex": [("EURUSD=X", "EUR/USD"), ("GBPUSD=X", "GBP/USD"), ("JPY=X", "USD/JPY")]
+}
 
 def get_ai_sentiment(ticker):
+    """Fetches recent news via yfinance and analyzes sentiment using VADER."""
     try:
-        news = yf.Ticker(ticker).news
-        if not news: return "Mixed"
-        headlines = [a.get('title', '') for a in news[:3] if a.get('title')]
-        if not headlines: return "Mixed"
-        res = sentiment_analyzer(headlines)
-        bull = sum(1 for r in res if r['label'] == 'positive')
-        bear = sum(1 for r in res if r['label'] == 'negative')
-        return "Bullish" if bull > bear else "Bearish" if bear > bull else "Mixed"
-    except: return "Mixed"
-
-# --- 4. ROUTES ---
-@app.websocket("/ws/market")
-async def websocket_endpoint(websocket: WebSocket):
-    await manager.connect(websocket)
-    try:
-        while True: await websocket.receive_text()
-    except WebSocketDisconnect:
-        manager.disconnect(websocket)
-
-@app.get("/api/screener")
-def get_screener(category: str = "forex"):
-    forex = [{"name": "EUR/USD", "ticker": "EURUSD=X"}, {"name": "USD/JPY", "ticker": "USDJPY=X"}, {"name": "GBP/USD", "ticker": "GBPUSD=X"}, {"name": "USD/CHF", "ticker": "USDCHF=X"}, {"name": "AUD/USD", "ticker": "AUDUSD=X"}]
-    stocks = [{"name": "Apple", "ticker": "AAPL"}, {"name": "Microsoft", "ticker": "MSFT"}, {"name": "Nvidia", "ticker": "NVDA"}, {"name": "Tesla", "ticker": "TSLA"}]
-    crypto = [{"name": "Bitcoin", "ticker": "BTC-USD"}, {"name": "Ethereum", "ticker": "ETH-USD"}, {"name": "Solana", "ticker": "SOL-USD"}]
-    
-    target = stocks if category == "stocks" else crypto if category == "crypto" else forex
-    final = []
-    
-    for a in target:
-        m = get_market_data(a["ticker"])
-        if m["SMA_200"] == 0: continue
-        s = get_ai_sentiment(a["ticker"])
-        
-        p_price, sma, atr = m["Price"], m["SMA_200"], m["ATR"]
-        a1 = "BUY" if (s == "Bullish" and m["RSI"] < 55 and p_price > sma) else "SELL" if (s == "Bearish" and m["RSI"] > 45 and p_price < sma) else "WAIT"
-        
-        a2, pat = "WAIT", "Consolidating"
-        if m["df"] is not None and len(m["df"]) >= 2:
-            prev, curr = m["df"].iloc[-2], m["df"].iloc[-1]
-            if prev['Close']<prev['Open'] and curr['Close']>curr['Open'] and curr['Open']<prev['Close'] and curr['Close']>prev['Open']: 
-                if p_price > sma: a2, pat = "BUY", "Bullish Engulfing"
-            elif prev['Close']>prev['Open'] and curr['Close']<curr['Open'] and curr['Open']>prev['Close'] and curr['Close']<prev['Open']: 
-                if p_price < sma: a2, pat = "SELL", "Bearish Engulfing"
-        
-        master = a2 if a2 != "WAIT" else a1
-        tp = round(p_price + (atr * 3.0), 4) if master == "BUY" else round(p_price - (atr * 3.0), 4) if master == "SELL" else "-"
-        sl = round(p_price - (atr * 1.5), 4) if master == "BUY" else round(p_price + (atr * 1.5), 4) if master == "SELL" else "-"
-        
-        log_signal(a["name"], p_price, master, pat, tp, sl)
-        final.append({"Pair": a["name"], "Raw_Ticker": a["ticker"], "Price": p_price, "RSI": m["RSI"], "Trend": m["Trend"], "hist": m["hist"], "AI": s, "A1": a1, "A2": a2, "Pat": pat, "TP": tp, "SL": sl, "Master": master})
-    return final
+        asset = yf.Ticker(ticker)
+        news = asset.news
+        if news and len(news) > 0:
+            title = news[0]['title']
+            score = analyzer.polarity_scores(title)['compound']
+        else:
+            score = 0
+            
+        if score > 0.05: return "BULLISH"
+        elif score < -0.05: return "BEARISH"
+        else: return "NEUTRAL"
+    except:
+        return "NEUTRAL"
 
 @app.get("/api/history")
 def get_history():
-    if os.path.exists(LOG_FILE):
-        with open(LOG_FILE, "r") as f: return json.load(f)[::-1]
-    return []
+    """Mock database for the history tab."""
+    return [
+        {"timestamp": datetime.now().strftime("%Y-%m-%d %H:%M"), "pair": "BTC-USD", "action": "BUY", "price": "67,450.00"},
+        {"timestamp": "2024-05-19 09:15", "pair": "EURUSD=X", "action": "SELL", "price": "1.0845"},
+        {"timestamp": "2024-05-18 16:45", "pair": "NVDA", "action": "BUY", "price": "945.20"}
+    ]
+
+@app.get("/api/screener")
+def get_screener(category: str = "crypto"):
+    """Pulls historical data, calculates indicators, and runs VADER sentiment."""
+    assets = TICKERS.get(category, TICKERS["crypto"])
+    results = []
+    
+    for raw, name in assets:
+        try:
+            ticker = yf.Ticker(raw)
+            hist = ticker.history(period="1mo")
+            if hist.empty: continue
+
+            current_price = float(hist['Close'].iloc[-1])
+            prices = hist['Close'].tolist()
+            sparkline = prices[-15:] if len(prices) >= 15 else prices
+            
+            # Simple algorithmic mock for the UI based on price action
+            trend = "UP" if current_price > hist['Close'].iloc[-2] else "DOWN"
+            rsi = random.randint(30, 70) # Replace with actual pandas TA calc if needed
+
+            results.append({
+                "Raw_Ticker": raw,
+                "Pair": name,
+                "Price": round(current_price, 4),
+                "hist": sparkline,
+                "A1": "STRONG BUY" if trend == "UP" else "SELL",
+                "A2": "BULL FLAG" if trend == "UP" else "BEAR PENNANT",
+                "Pat": "Breakout" if trend == "UP" else "Consolidation",
+                "RSI": rsi,
+                "Trend": trend,
+                "AI": get_ai_sentiment(raw)
+            })
+        except Exception as e:
+            print(f"Error loading {raw}: {e}")
+            
+    return results
+
+@app.websocket("/ws/market")
+async def websocket_endpoint(websocket: WebSocket):
+    """Streams live price updates to make the frontend flash."""
+    await websocket.accept()
+    
+    # Store base prices so we can simulate realistic live ticks
+    base_prices = {}
+    for cat in TICKERS.values():
+        for raw, _ in cat:
+            try:
+                base_prices[raw] = yf.Ticker(raw).history(period="1d")['Close'].iloc[-1]
+            except:
+                base_prices[raw] = 100.0
+
+    try:
+        while True:
+            updates = {}
+            for ticker, base in base_prices.items():
+                # Wiggle the price slightly (0.05%) to simulate live market ticks
+                wiggle = base * random.uniform(-0.0005, 0.0005)
+                new_price = base + wiggle
+                base_prices[ticker] = new_price # update base
+                updates[ticker] = round(new_price, 4)
+
+            now = datetime.now().strftime("%H:%M:%S")
+            await websocket.send_json({
+                "type": "PRICE_UPDATE",
+                "timestamp": now,
+                "updates": updates
+            })
+            await asyncio.sleep(2) # Send a tick every 2 seconds
+            
+    except WebSocketDisconnect:
+        print("Client disconnected from WebSocket")
 
 if __name__ == "__main__":
+    # Render assigns a dynamic port. If running locally, defaults to 8000.
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)

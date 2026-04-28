@@ -3,5 +3,4 @@ uvicorn
 websockets
 yfinance
 pandas
-transformers
-torch
+vaderSentiment
