@@ -1,0 +1,902 @@
+[
+    {
+        "timestamp": "11:33:08",
+        "pair": "EUR/JPY",
+        "price": 186.691,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5579,
+        "sl": 185.7575
+    },
+    {
+        "timestamp": "11:33:09",
+        "pair": "EUR/CHF",
+        "price": 0.9187,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9279,
+        "sl": 0.9141
+    },
+    {
+        "timestamp": "11:33:30",
+        "pair": "EUR/JPY",
+        "price": 186.702,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.569,
+        "sl": 185.7685
+    },
+    {
+        "timestamp": "11:33:30",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "11:33:33",
+        "pair": "CHF/JPY",
+        "price": 203.203,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 205.235,
+        "sl": 202.187
+    },
+    {
+        "timestamp": "11:33:59",
+        "pair": "EUR/JPY",
+        "price": 186.716,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5832,
+        "sl": 185.7824
+    },
+    {
+        "timestamp": "11:33:59",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "11:34:29",
+        "pair": "EUR/JPY",
+        "price": 186.719,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5862,
+        "sl": 185.7854
+    },
+    {
+        "timestamp": "11:34:29",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "11:34:59",
+        "pair": "EUR/JPY",
+        "price": 186.723,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5902,
+        "sl": 185.7894
+    },
+    {
+        "timestamp": "11:34:59",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "11:35:29",
+        "pair": "EUR/JPY",
+        "price": 186.717,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5842,
+        "sl": 185.7834
+    },
+    {
+        "timestamp": "11:35:29",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "11:35:58",
+        "pair": "EUR/JPY",
+        "price": 186.72,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5872,
+        "sl": 185.7864
+    },
+    {
+        "timestamp": "11:35:59",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "11:36:28",
+        "pair": "EUR/JPY",
+        "price": 186.71,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5771,
+        "sl": 185.7765
+    },
+    {
+        "timestamp": "11:36:29",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "11:36:59",
+        "pair": "EUR/JPY",
+        "price": 186.709,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5761,
+        "sl": 185.7755
+    },
+    {
+        "timestamp": "11:37:00",
+        "pair": "EUR/CHF",
+        "price": 0.9189,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9281,
+        "sl": 0.9143
+    },
+    {
+        "timestamp": "11:53:38",
+        "pair": "EUR/JPY",
+        "price": 186.722,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5892,
+        "sl": 185.7884
+    },
+    {
+        "timestamp": "11:53:38",
+        "pair": "EUR/CHF",
+        "price": 0.9189,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9281,
+        "sl": 0.9143
+    },
+    {
+        "timestamp": "11:53:46",
+        "pair": "EUR/JPY",
+        "price": 186.722,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5892,
+        "sl": 185.7884
+    },
+    {
+        "timestamp": "11:53:46",
+        "pair": "EUR/CHF",
+        "price": 0.9189,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9281,
+        "sl": 0.9143
+    },
+    {
+        "timestamp": "11:54:07",
+        "pair": "EUR/JPY",
+        "price": 186.726,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5933,
+        "sl": 185.7924
+    },
+    {
+        "timestamp": "11:54:07",
+        "pair": "EUR/CHF",
+        "price": 0.9189,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9281,
+        "sl": 0.9143
+    },
+    {
+        "timestamp": "11:54:16",
+        "pair": "EUR/JPY",
+        "price": 186.726,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5933,
+        "sl": 185.7924
+    },
+    {
+        "timestamp": "11:54:16",
+        "pair": "EUR/CHF",
+        "price": 0.9189,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9281,
+        "sl": 0.9143
+    },
+    {
+        "timestamp": "11:58:44",
+        "pair": "EUR/JPY",
+        "price": 186.73,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5973,
+        "sl": 185.7963
+    },
+    {
+        "timestamp": "11:58:47",
+        "pair": "CHF/JPY",
+        "price": 203.215,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 205.2472,
+        "sl": 202.1989
+    },
+    {
+        "timestamp": "11:59:14",
+        "pair": "EUR/JPY",
+        "price": 186.719,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5862,
+        "sl": 185.7854
+    },
+    {
+        "timestamp": "11:59:15",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "11:59:17",
+        "pair": "CHF/JPY",
+        "price": 203.204,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 205.236,
+        "sl": 202.188
+    },
+    {
+        "timestamp": "11:59:44",
+        "pair": "EUR/JPY",
+        "price": 186.731,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5983,
+        "sl": 185.7973
+    },
+    {
+        "timestamp": "11:59:45",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "11:59:47",
+        "pair": "CHF/JPY",
+        "price": 203.22,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 205.2522,
+        "sl": 202.2039
+    },
+    {
+        "timestamp": "12:00:14",
+        "pair": "EUR/JPY",
+        "price": 186.729,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5963,
+        "sl": 185.7954
+    },
+    {
+        "timestamp": "12:00:15",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:00:18",
+        "pair": "CHF/JPY",
+        "price": 203.201,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 205.233,
+        "sl": 202.185
+    },
+    {
+        "timestamp": "12:00:44",
+        "pair": "EUR/JPY",
+        "price": 186.724,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5912,
+        "sl": 185.7904
+    },
+    {
+        "timestamp": "12:00:47",
+        "pair": "CHF/JPY",
+        "price": 203.205,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 205.2371,
+        "sl": 202.189
+    },
+    {
+        "timestamp": "12:01:14",
+        "pair": "EUR/JPY",
+        "price": 186.723,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5902,
+        "sl": 185.7894
+    },
+    {
+        "timestamp": "12:01:14",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:01:16",
+        "pair": "CHF/JPY",
+        "price": 203.208,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 205.2401,
+        "sl": 202.192
+    },
+    {
+        "timestamp": "12:01:44",
+        "pair": "EUR/JPY",
+        "price": 186.736,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.6034,
+        "sl": 185.8023
+    },
+    {
+        "timestamp": "12:01:44",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:01:47",
+        "pair": "CHF/JPY",
+        "price": 203.204,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 205.236,
+        "sl": 202.188
+    },
+    {
+        "timestamp": "12:04:44",
+        "pair": "EUR/JPY",
+        "price": 186.729,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5963,
+        "sl": 185.7954
+    },
+    {
+        "timestamp": "12:04:45",
+        "pair": "EUR/CHF",
+        "price": 0.9189,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9281,
+        "sl": 0.9143
+    },
+    {
+        "timestamp": "12:04:52",
+        "pair": "EUR/JPY",
+        "price": 186.729,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5963,
+        "sl": 185.7954
+    },
+    {
+        "timestamp": "12:04:52",
+        "pair": "EUR/CHF",
+        "price": 0.9189,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9281,
+        "sl": 0.9143
+    },
+    {
+        "timestamp": "12:05:08",
+        "pair": "EUR/JPY",
+        "price": 186.721,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5882,
+        "sl": 185.7874
+    },
+    {
+        "timestamp": "12:05:08",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:05:38",
+        "pair": "EUR/JPY",
+        "price": 186.723,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5902,
+        "sl": 185.7894
+    },
+    {
+        "timestamp": "12:05:38",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:06:08",
+        "pair": "EUR/JPY",
+        "price": 186.722,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5892,
+        "sl": 185.7884
+    },
+    {
+        "timestamp": "12:06:09",
+        "pair": "EUR/CHF",
+        "price": 0.9189,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9281,
+        "sl": 0.9143
+    },
+    {
+        "timestamp": "12:06:38",
+        "pair": "EUR/JPY",
+        "price": 186.717,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5842,
+        "sl": 185.7834
+    },
+    {
+        "timestamp": "12:06:38",
+        "pair": "EUR/CHF",
+        "price": 0.9189,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9281,
+        "sl": 0.9143
+    },
+    {
+        "timestamp": "12:07:08",
+        "pair": "EUR/JPY",
+        "price": 186.72,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5872,
+        "sl": 185.7864
+    },
+    {
+        "timestamp": "12:07:08",
+        "pair": "EUR/CHF",
+        "price": 0.9189,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9281,
+        "sl": 0.9143
+    },
+    {
+        "timestamp": "12:07:38",
+        "pair": "EUR/JPY",
+        "price": 186.716,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5832,
+        "sl": 185.7824
+    },
+    {
+        "timestamp": "12:07:38",
+        "pair": "EUR/CHF",
+        "price": 0.9189,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9281,
+        "sl": 0.9143
+    },
+    {
+        "timestamp": "12:08:08",
+        "pair": "EUR/JPY",
+        "price": 186.71,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5771,
+        "sl": 185.7765
+    },
+    {
+        "timestamp": "12:08:08",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:08:38",
+        "pair": "EUR/JPY",
+        "price": 186.719,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5862,
+        "sl": 185.7854
+    },
+    {
+        "timestamp": "12:09:08",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:09:38",
+        "pair": "EUR/JPY",
+        "price": 186.703,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.57,
+        "sl": 185.7695
+    },
+    {
+        "timestamp": "12:09:38",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:10:08",
+        "pair": "EUR/JPY",
+        "price": 186.701,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.568,
+        "sl": 185.7675
+    },
+    {
+        "timestamp": "12:10:08",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:10:38",
+        "pair": "EUR/JPY",
+        "price": 186.704,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.571,
+        "sl": 185.7705
+    },
+    {
+        "timestamp": "12:10:38",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:11:08",
+        "pair": "EUR/JPY",
+        "price": 186.701,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.568,
+        "sl": 185.7675
+    },
+    {
+        "timestamp": "12:11:08",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:11:38",
+        "pair": "EUR/JPY",
+        "price": 186.699,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.566,
+        "sl": 185.7655
+    },
+    {
+        "timestamp": "12:11:38",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:12:08",
+        "pair": "EUR/JPY",
+        "price": 186.699,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.566,
+        "sl": 185.7655
+    },
+    {
+        "timestamp": "12:12:08",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:12:38",
+        "pair": "EUR/JPY",
+        "price": 186.695,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5619,
+        "sl": 185.7615
+    },
+    {
+        "timestamp": "12:12:38",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "12:13:08",
+        "pair": "EUR/JPY",
+        "price": 186.693,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.5599,
+        "sl": 185.7595
+    },
+    {
+        "timestamp": "12:13:08",
+        "pair": "EUR/CHF",
+        "price": 0.9188,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.928,
+        "sl": 0.9142
+    },
+    {
+        "timestamp": "20:50:32",
+        "pair": "EUR/JPY",
+        "price": 186.827,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.6953,
+        "sl": 185.8929
+    },
+    {
+        "timestamp": "20:50:32",
+        "pair": "EUR/CHF",
+        "price": 0.9196,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9288,
+        "sl": 0.915
+    },
+    {
+        "timestamp": "20:50:35",
+        "pair": "GBP/CHF",
+        "price": 1.0602,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 1.0708,
+        "sl": 1.0549
+    },
+    {
+        "timestamp": "20:50:40",
+        "pair": "EUR/JPY",
+        "price": 186.827,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.6953,
+        "sl": 185.8929
+    },
+    {
+        "timestamp": "20:50:40",
+        "pair": "EUR/CHF",
+        "price": 0.9196,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9288,
+        "sl": 0.915
+    },
+    {
+        "timestamp": "20:50:42",
+        "pair": "GBP/CHF",
+        "price": 1.0602,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 1.0708,
+        "sl": 1.0549
+    },
+    {
+        "timestamp": "20:51:15",
+        "pair": "EUR/JPY",
+        "price": 186.825,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.6932,
+        "sl": 185.8909
+    },
+    {
+        "timestamp": "20:51:16",
+        "pair": "EUR/CHF",
+        "price": 0.9196,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9288,
+        "sl": 0.915
+    },
+    {
+        "timestamp": "20:51:19",
+        "pair": "GBP/CHF",
+        "price": 1.0602,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 1.0708,
+        "sl": 1.0549
+    },
+    {
+        "timestamp": "20:51:23",
+        "pair": "EUR/JPY",
+        "price": 186.825,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.6932,
+        "sl": 185.8909
+    },
+    {
+        "timestamp": "20:51:24",
+        "pair": "EUR/CHF",
+        "price": 0.9196,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9288,
+        "sl": 0.915
+    },
+    {
+        "timestamp": "20:51:26",
+        "pair": "GBP/CHF",
+        "price": 1.0602,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 1.0708,
+        "sl": 1.0549
+    },
+    {
+        "timestamp": "20:51:46",
+        "pair": "EUR/JPY",
+        "price": 186.841,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.7094,
+        "sl": 185.9068
+    },
+    {
+        "timestamp": "20:51:46",
+        "pair": "EUR/CHF",
+        "price": 0.9196,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9288,
+        "sl": 0.915
+    },
+    {
+        "timestamp": "20:51:49",
+        "pair": "GBP/CHF",
+        "price": 1.0602,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 1.0708,
+        "sl": 1.0549
+    },
+    {
+        "timestamp": "20:52:16",
+        "pair": "EUR/JPY",
+        "price": 186.848,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 188.7165,
+        "sl": 185.9138
+    },
+    {
+        "timestamp": "20:52:17",
+        "pair": "EUR/CHF",
+        "price": 0.9196,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 0.9288,
+        "sl": 0.915
+    },
+    {
+        "timestamp": "20:52:19",
+        "pair": "GBP/CHF",
+        "price": 1.0602,
+        "action": "BUY",
+        "pattern": "Bullish Engulfing",
+        "tp": 1.0708,
+        "sl": 1.0549
+    }
+]

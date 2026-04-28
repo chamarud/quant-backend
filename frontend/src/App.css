@@ -1,0 +1,201 @@
+:root {
+  --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --accent: #38bdf8;
+  --buy: #22c55e; --sell: #ef4444; --wait: #64748b;
+}
+
+body { background: var(--bg); color: var(--text); margin: 0; font-family: sans-serif; }
+.app-layout { display: flex; min-height: 100vh; }
+
+/* SIDEBAR & NAV */
+.sidebar { width: 260px; background: #1e293b; padding: 20px; border-right: 1px solid #334155; position: fixed; height: 100vh; }
+.logo { font-size: 1.5rem; font-weight: bold; color: var(--accent); margin-bottom: 30px; }
+.menu button { width: 100%; padding: 15px; background: none; border: none; color: #94a3b8; text-align: left; cursor: pointer; border-radius: 8px; margin-bottom: 5px; }
+.menu button.active { background: var(--accent); color: var(--bg); font-weight: bold; }
+
+/* MAIN AREA */
+.main-content { margin-left: 260px; padding: 40px; flex: 1; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.pulse-dot { display: inline-block; width: 8px; height: 8px; background: var(--buy); border-radius: 50%; margin-right: 8px; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+.card { background: var(--card); padding: 20px; border-radius: 12px; border: 1px solid #334155; transition: 0.2s; cursor: pointer; }
+.card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.price-label { font-size: 1.2rem; font-weight: bold; color: var(--accent); }
+
+/* SPARKLINE */
+.spark-wrapper { height: 50px; margin: 15px 0; }
+svg { width: 100%; height: 100%; }
+
+/* SIDE-BY-SIDE SIGNALS */
+.multi-algo-container { display: flex; gap: 10px; margin: 15px 0; }
+.sig-box.split { flex: 1; padding: 12px 5px; border-radius: 8px; text-align: center; color: white; }
+.sig-box span { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; display: block; }
+.sig-box h3 { margin: 5px 0; font-size: 1.1rem; }
+.sig-box.buy { background: var(--buy); }
+.sig-box.sell { background: var(--sell); }
+.sig-box.wait { background: var(--wait); }
+
+/* NEW GRAPHICAL ORDER TICKET */
+.graphical-ticket {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 15px;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+}
+.ticket-header { font-size: 0.65rem; color: #94a3b8; text-align: center; letter-spacing: 2px; margin-bottom: 10px; border-bottom: 1px dashed #334155; padding-bottom: 5px; }
+.ticket-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 8px; }
+.ticket-row span { color: #64748b; }
+.ticket-row strong { color: #f8fafc; font-family: monospace; font-size: 1rem; }
+.ticket-row.tp strong { color: var(--buy); }
+.ticket-row.sl strong { color: var(--sell); }
+
+/* --- THE FULL SCREEN TERMINAL STYLES --- */
+.terminal-layout { display: flex; flex-direction: column; height: 100vh; background: var(--bg); }
+.terminal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: var(--card); border-bottom: 1px solid #334155; }
+.back-btn { background: #334155; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+.back-btn:hover { background: var(--accent); color: var(--bg); }
+.terminal-price { font-size: 1.5rem; color: var(--accent); font-weight: bold; font-family: monospace; }
+
+.terminal-body { display: flex; flex: 1; overflow: hidden; }
+.chart-area { flex: 3; background: #000; border-right: 1px solid #334155; }
+.order-panel { flex: 1; min-width: 300px; max-width: 400px; background: var(--card); padding: 25px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; }
+
+.setup-metrics { background: #0f172a; padding: 15px; border-radius: 8px; }
+.setup-metrics p { display: flex; justify-content: space-between; margin: 10px 0; font-size: 0.9rem; border-bottom: 1px solid #1e293b; padding-bottom: 5px; }
+.setup-metrics span { color: #94a3b8; }
+.bullish { color: var(--buy); }
+.bearish { color: var(--sell); }
+
+.action-buttons { display: flex; gap: 10px; }
+.buy-btn, .sell-btn { flex: 1; padding: 15px; border: none; border-radius: 6px; font-weight: bold; color: white; cursor: pointer; font-size: 1rem; }
+.buy-btn { background: var(--buy); opacity: 0.5; }
+.sell-btn { background: var(--sell); opacity: 0.5; }
+.buy-btn.glow { opacity: 1; box-shadow: 0 0 15px rgba(34, 197, 94, 0.5); }
+.sell-btn.glow { opacity: 1; box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); }
+
+/* History Table */
+.table-container { background: var(--card); border-radius: 12px; padding: 20px; }
+.history-table { width: 100%; text-align: left; border-collapse: collapse; }
+.history-table th, .history-table td { padding: 15px; border-bottom: 1px solid #334155; }
+.history-table th { color: var(--accent); }
+.history-table .buy { color: var(--buy); font-weight: bold; }
+.history-table .sell { color: var(--sell); font-weight: bold; }
+
+/* Live Status Indicator */
+.status-bar { display: flex; align-items: center; gap: 10px; background: #1e293b; padding: 5px 15px; border-radius: 20px; border: 1px solid #334155; }
+.status-dot { width: 10px; height: 10px; border-radius: 50%; }
+.status-dot.live { background: #22c55e; box-shadow: 0 0 10px #22c55e; }
+.status-dot.offline { background: #ef4444; }
+
+/* The Live Price Flash Animation */
+.price-label { transition: color 0.3s ease; }
+.price-label.flash {
+  color: #fff;
+  background: #22c55e; /* Flash green on tick */
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+/* --- AUTHENTICATION LANDING PAGE --- */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #0f172a;
+  color: white;
+}
+
+.auth-box {
+  background: #1e293b;
+  padding: 50px;
+  border-radius: 15px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border: 1px solid #334155;
+}
+
+.auth-box h1 { font-size: 2rem; margin-bottom: 5px; letter-spacing: 2px;}
+.auth-box h1 span { color: #3b82f6; }
+.auth-box .subtitle { color: #94a3b8; font-size: 0.9rem; margin-bottom: 30px; }
+
+.auth-form { display: flex; flex-direction: column; gap: 15px; }
+
+.auth-form input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: white;
+  font-size: 1rem;
+}
+
+.auth-form input:focus { outline: none; border-color: #3b82f6; }
+
+.auth-submit-btn {
+  background: #3b82f6;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+.auth-submit-btn:hover { background: #2563eb; }
+
+.auth-switch {
+  margin-top: 20px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.auth-switch:hover { color: white; text-decoration: underline; }
+
+.error-banner {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  border: 1px solid #ef4444;
+}
+
+/* User Profile Sidebar Additions */
+.user-profile {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #334155;
+}
+.user-email { color: #94a3b8; font-size: 0.8rem; margin-bottom: 10px; word-break: break-all;}
+.logout-btn {
+  width: 100%;
+  padding: 8px;
+  background: transparent;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.logout-btn:hover { background: rgba(239, 68, 68, 0.1); }
+/* --- PAYWALL STYLES --- */
+.paywall-box { width: 450px; }
+.pricing-card { background: #0f172a; padding: 30px; border-radius: 10px; border: 1px solid #334155; margin-bottom: 20px;}
+.pricing-card h2 { font-size: 2.5rem; color: #fff; margin-bottom: 20px; }
+.pricing-card h2 span { font-size: 1rem; color: #94a3b8; }
+.features-list { list-style: none; padding: 0; text-align: left; margin-bottom: 25px; }
+.features-list li { margin-bottom: 12px; color: #cbd5e1; font-size: 0.95rem; }
+.pay-btn { display: block; text-decoration: none; padding: 15px; background: #6366f1; border-radius: 8px; font-weight: bold; margin-bottom: 15px;}
+.pay-btn:hover { background: #4f46e5; color: white;}
+.bypass-btn { background: transparent; border: 1px dashed #64748b; color: #94a3b8; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; font-size: 0.8rem;}
+.bypass-btn:hover { background: rgba(100, 116, 139, 0.1); color: white; }
+.paywall-profile { border-top: none; padding-top: 0; }
