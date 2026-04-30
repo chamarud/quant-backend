@@ -7,8 +7,8 @@ import './App.css';
 // 🛑 CONFIGURATION: PASTE YOUR LIVE LINKS HERE
 // =====================================================================
 const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/4gM4gAgBvgziekN6Dm7IY00"; 
-const BACKEND_API_URL = "https://quant-backend-7uo3.onrender.com"; // <-- Replace with your Render URL
-const WEBSOCKET_URL = "wss://https://quant-backend-7uo3.onrender.com/ws/market"; // <-- Replace with your Render URL (Keep the wss://)
+const BACKEND_API_URL = "https://quant-backend-7uo3.onrender.com"; 
+const WEBSOCKET_URL = "wss://quant-backend-7uo3.onrender.com/ws/market"; 
 // =====================================================================
 
 // --- 1. THE AUTHENTICATION LANDING PAGE ---
